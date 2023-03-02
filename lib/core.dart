@@ -1,9 +1,5 @@
 import 'dart:io';
 
-int calculate() {
-  return 6 * 7;
-}
-
 bool login(String? username, String? password) {
   String user_login = "admin";
   String password_login = "admin";
@@ -13,29 +9,40 @@ bool login(String? username, String? password) {
 }
 
 void menu(String? username) {
-  print('Hello $username');
-  print('Menu');
-  print('1. Kelompok Kami');
-  print('2. Penjumlahan Angka');
-  print('3. Pengurangan Angka');
-  print('Pilih menu : ');
-  int? menu = int.parse(stdin.readLineSync()!);
-  switch (menu) {
-    case 1:
-      dataKelompok();
-      print('Kembali ke menu awal [y/n] : ');
-      String? kembali = stdin.readLineSync();
-      break;
-    case 2:
-      penjumlahan();
-      break;
-    case 3:
-      pengurangan();
-      break;
-    default:
-      print('Pilihan anda tidak ada di menu');
-      break;
+  String kembali = 'y';
+  while (kembali == 'y' || kembali == 'Y') {
+    print('Hello $username');
+    print('Menu');
+    print('1. Kelompok Kami');
+    print('2. Penjumlahan Angka');
+    print('3. Pengurangan Angka');
+    print('Pilih menu : ');
+    int? menu = int.parse(stdin.readLineSync()!);
+    switch (menu) {
+      case 1:
+        dataKelompok();
+        kembali = kembaliKeMenu();
+        break;
+      case 2:
+        penjumlahan();
+        kembali = kembaliKeMenu();
+        break;
+      case 3:
+        pengurangan();
+        kembali = kembaliKeMenu();
+        break;
+      default:
+        print('Pilihan anda tidak ada di menu');
+        kembali = kembaliKeMenu();
+        break;
+    }
   }
+}
+
+String kembaliKeMenu() {
+  print('Kembali ke menu awal [y/n] : ');
+  String kembali = stdin.readLineSync()!;
+  return kembali;
 }
 
 void penjumlahan() {
